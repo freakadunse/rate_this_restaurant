@@ -39,8 +39,8 @@ class Controller{
                 $innerView->assign('entries', $entries);  
         }  
         $this->view->setTemplate('theblog');  
-        $this->view->assign('blog_title', 'Der Titel des Blogs');  
-        $this->view->assign('blog_footer', 'Ein Blog von und mit MVC');  
+        $this->view->assign('blog_title', 'Rate this!');  
+        $this->view->assign('blog_footer', '&copy Attila Tevi, Pascal Sch&uuml;mann, Manuel Schmidt');  
         $this->view->assign('blog_content', $innerView->loadTemplate());  
         return $this->view->loadTemplate();  
     }  
