@@ -1,7 +1,11 @@
 <?php 
 // Klassen einbinden
 include('classes/controller.php');
-include('classes/model.php');
+
+foreach (glob("models/*.php") as $filename) {
+    include $filename;
+}
+
 include('classes/view.php');
 include('classes/helper.php');
 include('config/db.php');

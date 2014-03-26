@@ -48,6 +48,14 @@ a:hover {
 	left: 380px;
 }
 
+#nav_top a {
+	text-decoration: none;
+	color: #000;
+	display: block;
+	height: 24px;
+	width: 100px;
+}
+
 #nav_top ul {
 	list-style-type: none;
 	padding-bottom: 20px;
@@ -74,6 +82,7 @@ a:hover {
 #content {
 	padding-top: 45px;
 	min-height: 450px;
+
 }
 
 #search input {
@@ -109,4 +118,8 @@ a:hover {
 
 .post.last {
 	border-bottom: none;
+}
+
+.posts {
+	display: none;
 }

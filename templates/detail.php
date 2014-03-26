@@ -12,10 +12,11 @@
             <?php 
             $firstline = false;
         endif;?>
-        <div class="post <?php if ($counter == $anzahl_posts): echo 'last'; endif;?>">  
+        <div class="post<?php if ($counter == $anzahl_posts): echo ' last'; endif;?>">  
             <p><?php echo $post->text;?></p>
             <a href="?view=default">Zur&uuml;ck zur &Uuml;bersicht</a>
         </div>
         <?php 
+        $counter++;
     endforeach;?>
 </article>

@@ -46,7 +46,7 @@ class View {
         $exists = file_exists($file);
 
         if ($exists){
-            // Der Output des Scripts wird n einen Buffer gespeichert, d.h.
+            // Der Output des Scripts wird in einen Buffer gespeichert, d.h.
             // nicht gleich ausgegeben.
             ob_start();
 
