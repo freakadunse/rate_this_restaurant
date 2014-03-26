@@ -19,8 +19,8 @@
                 <li><p>Dummy</p></li>
                 <li><p>Dummy</p></li>
             </ul>
-            <form id="search">
-                <input type="search" placeholder="Suchbegriff eingeben ..." />
+            <form id="search" method="post" action="/">
+                <input name="search" type="search" placeholder="Suchbegriff eingeben ..." />
             </form>
         </div>
     </div>
@@ -39,7 +39,3 @@
 </div>
 </body>
 </html>
-
-
- 
- 

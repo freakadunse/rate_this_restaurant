@@ -90,5 +90,23 @@ a:hover {
 
 #footer {
 	position: relative;
-	
+}
+
+.posts_header {
+	padding-bottom: 20px;
+	font-style: italic;
+}
+
+.posts {
+	padding: 10px;
+}
+
+.post {
+	padding-bottom: 5px;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+
+.post.last {
+	border-bottom: none;
 }

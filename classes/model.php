@@ -17,7 +17,15 @@ class Model{
      * @return Array Array von Blogeinträgen.
      */
     public static function getEntries(){
-        return self::$entries;
+        $abfrage = "SELECT * FROM tbl_lokal";
+        $result = mysql_query($abfrage);
+        $data = array();
+        
+        while ($row = mysql_fetch_object($result))
+            $data[] = $row;
+  
+        return $data;
+
     }
 
     /**
@@ -28,10 +36,37 @@ class Model{
      *                  wenn dieser nicht vorhanden ist, null.
      */
     public static function getEntry($id){
-        if(array_key_exists($id, self::$entries)){
-            return self::$entries[$id];
-        }else{
-            return null;
+        
+        $abfrage = "SELECT * FROM tbl_posts p INNER JOIN tbl_lokal l ON (l.lokal_id = p.lokal_id) WHERE p.lokal_id = ". $id;
+        $result = mysql_query($abfrage);
+        $data = array();
+        
+        while ($entry = mysql_fetch_object($result)){
+            $data[] = $entry;
         }
+        
+        if (count($data) > 0):
+            return $data;
+        else:
+            return null;
+        endif;
+    }
+    
+    public static function getEntrySearch($string) {
+        $abfrage = "SELECT * FROM tbl_lokal p WHERE name LIKE '%". $string . "%' OR anschrift LIKE '%" . $string ."%'";
+
+        $result = mysql_query($abfrage);
+        $data = array();
+        
+        while ($entry = mysql_fetch_object($result)){
+            $data[] = $entry;
+        }
+        
+        if (count($data) > 0):
+            return $data;
+        else:
+            return null;
+        endif;
+    
     }
 }
