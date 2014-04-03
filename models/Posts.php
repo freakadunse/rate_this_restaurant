@@ -10,7 +10,7 @@ class Posts {
      */
     public static function getEntry($id){
     
-        $abfrage = "SELECT * FROM tbl_posts p INNER JOIN tbl_einrichtung l ON (l.einrichtung_id = p.einrichtung_id) WHERE p.einrichtung_id = ". $id;
+        $abfrage = "SELECT * FROM tbl_posts p INNER JOIN tbl_lokal l ON (l.lokal_id = p.lokal_id) WHERE p.lokal_id = ". $id;
         $result = mysql_query($abfrage);
         $data = array();
     

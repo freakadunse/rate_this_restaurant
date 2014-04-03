@@ -10,6 +10,21 @@ body {
 	font: 14px Helvetica, Sans-Serif; line-height: 24px; color: #a6a6a6;
 }
 
+input {
+	height: 25px;
+	border-radius: 5px;
+	padding: 2px;
+	border: 1px solid #ccc;
+	width: 250px;
+}
+
+#register textarea {
+	border-radius: 5px;
+	padding: 2px;
+	border: 1px solid #ccc;
+	width: 250px;
+}
+
 #page {
 	width: 1200px;
 	margin: auto;
@@ -87,7 +102,7 @@ a:hover {
 
 #search input {
 	width: 240px;
-	height: 20px;
+	height: 25px;
 	border-radius: 5px;
 	padding: 2px;
 	border: 1px solid #ccc;
@@ -123,3 +138,31 @@ a:hover {
 .posts {
 	display: none;
 }
+
+#login .button, #register .button {
+	width: 100px;
+	height: 25px;
+	font-weight: bold;
+	background: #fff;
+	margin-left: 300px;
+}
+
+#login label, #register label {
+	width: 150px;
+	display: block;
+	float: left;
+}
+
+#login, #register {
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+}
+
+#login {
+	border-bottom: 1px solid #ccc;
+}
+
+p.line {
+	padding-bottom: 10px;
+}
+

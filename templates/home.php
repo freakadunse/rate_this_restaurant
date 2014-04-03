@@ -6,7 +6,7 @@
 	<link href="public/css/style.css" rel="stylesheet" />
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 	<script src="public/js/jquery.js"></script>
-	<script src="public/js/extra.js"></script>
+	<script src="public/js/extra.js" ></script>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
                 <li><p><a href="/">Home</a></p></li>
                 <li><p>Neuer Eintrag</p></li>
                 <li><p>Dummy</p></li>
-                <li><p><a href="/?new=einrichtung">Neue Einrichtung</a></p></li>
+                <li><p><a href="/?view=edit">Lokal bearbeiten</a></p></li>
             </ul>
             <form id="search" method="post" action="/">
                 <input name="search" type="search" placeholder="Suchbegriff eingeben ..." />
