@@ -166,3 +166,12 @@ p.line {
 	padding-bottom: 10px;
 }
 
+.error {
+	font-weight: bold;
+	color: red;
+}
+
+.success {
+	font-weight: bold;
+	color: green;
+}

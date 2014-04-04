@@ -3,7 +3,9 @@ class Controller{
   
     private $request = null;  
     private $template = '';  
-    private $view = null;  
+    private $view = null; 
+    public $errorMessage = ""; 
+    public $successMessage = "";
   
     /** 
      * Konstruktor, erstellt den Controller. 
@@ -14,11 +16,11 @@ class Controller{
        
         $this->view = new View();  
         $this->request = $request;
-        
-        if(isset($this->request['new'])):
-            $this->template = strtolower($this->request['new']);
+
+        if(isset($this->request['view']) && !empty($request['view'])):
+            $this->template = strtolower($this->request['view']);
         else:
-            $this->template = !empty($request['view']) ? $request['view'] : 'default';  
+            $this->template = 'default';  
         endif;
         
         $this->init();
@@ -40,26 +42,38 @@ class Controller{
     }
     
     public function index(){
-        
+
        if(isset($_REQUEST['action'])){
           
            if($_REQUEST['action'] == 'login'){
-                 
                  $this->login();
              } elseif ($_REQUEST['action'] == 'register'){
                  $this->register();
              }
         }
+        
+        echo $this->display();
     }
     
     public function register(){
         $Lokal = new Lokal();
         
-        if(!$Lokal->existEmail($_REQUEST['emailadresse'])):
-            $Lokal->register();
+        if(!$Lokal->emailExists($_REQUEST['emailadresse'])):
+            if($Lokal->register()):
+                $this->successMessage = "Datensatz erfolgreich angelegt, bitte logge Dich jetzt ein.";
+                unset($_REQUEST);
+            else:
+                $this->errorMessage = "Beim Speichern des Datensatzes ist ein Fehler aufgetreten!";
+            endif;
         else:
+            $this->errorMessage = "Die eingebene Email-Adresse existiert bereits!";
             $Lokal->resetPasswort();
         endif;
+        
+    }
+    
+    public function login(){
+        echo "Login TEst";
     }
   
     /** 
@@ -67,13 +81,17 @@ class Controller{
      * 
      * @return String Content der Applikation. 
      */  
-    public function display(){  
+    public function display(){ 
+
         $Lokal = new Lokal();
         if(isset($this->request['search'])):
             $result = $Lokal->getLokale($this->request['search']);
         endif;
         
         $innerView = new View();
+        $innerView->assign('errors', $this->errorMessage);
+        $innerView->assign('success', $this->successMessage);
+
         switch($this->template){
             case 'detail':
                 $innerView->setTemplate('detail');
@@ -89,7 +107,7 @@ class Controller{
                 break;
             case 'edit':
                 
-                if($_SESSION['loggedin']):
+                if(!empty($_SESSION['loggedin'])):
                     $innerView->setTemplate('edit');
                 else:
                     $innerView->setTemplate('login');

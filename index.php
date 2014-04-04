@@ -19,4 +19,4 @@ $request = array_merge($_GET, $_POST);
 $controller = new Controller($request);
 
 // Inhalt der Webanwendung ausgeben.
-echo $controller->display();
+//echo $controller->display();

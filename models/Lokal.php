@@ -1,5 +1,6 @@
 <?php
 class Lokal {
+    private $table = "tbl_lokal";
     
     /**
      * Gibt alle Einträge der Tabelle Lokale zurück.
@@ -9,12 +10,12 @@ class Lokal {
     public function getLokale($string = ""){
         
         if ($string != ""):
-            $abfrage = "SELECT * FROM tbl_lokal p WHERE name LIKE '%". $string . "%' OR anschrift LIKE '%" . $string ."%'";
+            $query = "SELECT * FROM tbl_lokal p WHERE name LIKE '%". $string . "%' OR anschrift LIKE '%" . $string ."%'";
         else:
-            $abfrage = "SELECT * FROM tbl_lokal";
+            $query = "SELECT * FROM tbl_lokal";
         endif;
         
-        $result = mysql_query($abfrage);
+        $result = mysql_query($query);
         $data = array();
     
         while ($row = mysql_fetch_object($result))
@@ -29,25 +30,39 @@ class Lokal {
     
     
     public function register(){
-        dump($_REQUEST); 
-        // schreibe in Datenbank
-        exit;
+        $fields = $this->sqlEscape($_REQUEST);
+        
+        $query = "INSERT INTO {$this->table} (name, anschrift, email, passwort, beschreibung) VALUES ('{$fields['name']}','{$fields['anschrift']}','{$fields['emailadresse']}','{$fields['passwort']}','{$fields['beschreibung']}')";
+        
+        return mysql_query($query);
     }
     
     public function resetPasswort(){
         
     }
     
-    public function existEmail($email){
+    public function emailExists($email){
         $return = false;
-        $abfrage = "SELECT * FROM tbl_lokal p WHERE email = '". $email . "'";
+        $query = "SELECT * FROM tbl_lokal p WHERE email = '". $email . "'";
         
-        $result = mysql_query($abfrage);
+        $result = mysql_query($query);
         
         if(mysql_num_rows($result) > 0) {
             $return = true;
         }
         
         return $return;
+    }
+    
+    private function sqlEscape($request){
+        $data = array();
+        foreach($request as $key => $value) {
+            if($key == 'passwort')
+                $data[$key] = md5(mysql_real_escape_string($value));
+            else
+                $data[$key] = mysql_real_escape_string($value);
+        }
+        
+        return $data;
     }
 }

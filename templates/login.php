@@ -1,6 +1,21 @@
 <article class="posts">
+    <?php
+    if(!empty($this->_['errors'])): ?>
+        <p class="line error">
+            <?php 
+            echo $this->_['errors']; ?>
+        </p>
+        <?php 
+    endif;
+    if(!empty($this->_['success'])): ?>
+        <p class="line success">
+            <?php 
+            echo $this->_['success']; ?>
+        </p>
+        <?php 
+    endif; ?>
     <p class="line">Du musst Dich erst einloggen um Dein Lokal hier eintragen zu k&ouml;nnen ...</p>
-    <form id="login" action="/?view=new" method="post">
+    <form id="login" action="/?view=edit" method="post">
         <input type="hidden" name="action" value="login" />
         <p class="line">
             <label for="emailadresse">Deine Emailadresse*:</label>
@@ -17,7 +32,7 @@
         <input id="login_button" class="button" type="submit" value="Login" tabindex="5" disabled/>
     </form>
     <p class="line">... oder registriere Dich neu!</p>
-    <form id="register" action="/?view=new&action=register" method="post">
+    <form id="register" action="/?view=edit" method="post">
         <input type="hidden" name="action" value="register" />
         <p class="line">
             <label for="emailadresse">Deine Emailadresse*:</label>
