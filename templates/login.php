@@ -1,5 +1,6 @@
 <article class="posts">
     <?php
+	include("./config/recaptcha.lib");
     if(!empty($this->_['errors'])): ?>
         <p class="line error">
             <?php 
@@ -59,6 +60,32 @@
             <textarea name="beschreibung" id="beschreibung" rows="4" tabindex="11"></textarea><br/>
         </p>
         <input class="button" type="submit" value="Registrieren"  tabindex="12" disabled/>
+		<?php
+		// Get a key from https://www.google.com/recaptcha/admin/create
+		$publickey = "";
+		$privatekey = "";
+
+		# the response from reCAPTCHA
+		$resp = null;
+		# the error code from reCAPTCHA, if any
+		$error = null;
+
+		# was there a reCAPTCHA response?
+		if ($_POST["recaptcha_response_field"]) {
+				$resp = recaptcha_check_answer ($privatekey,
+                                        $_SERVER["REMOTE_ADDR"],
+                                        $_POST["recaptcha_challenge_field"],
+                                        $_POST["recaptcha_response_field"]);
+
+			if ($resp->is_valid) {
+                echo "You got it!";
+			} else {
+                # set the error code so that we can display it
+                $error = $resp->error;
+			}	
+		}
+		echo recaptcha_get_html($publickey, $error);
+		?>
     </form>
     <p class="line">* Pflichtfelder</p>
 </article>
